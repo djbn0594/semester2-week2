@@ -41,7 +41,18 @@ def screening_sales(conn):
     Include all screenings, even if tickets_sold is 0.
     Order results by tickets_sold descending.
     """
-    pass
+    query = '''
+    SELECT S.screening_id, F.title, Count(T.ticket_id) AS tickets_sold
+    FROM screenings S JOIN films F ON S.film_id = F.film_id
+    LEFT JOIN tickets T S ON T.screening_id = S.screening_id
+    GROUP BY S.screening_id, F.title
+    ORDER BY tickets_sold DESC
+    '''
+    
+    cursor = conn.cursor()
+    cursor.execute(query)
+
+    return cursor.fetchall()
 
 
 def top_customers_by_spend(conn, limit):
