@@ -27,9 +27,9 @@ def customer_tickets(conn, customer_id):
     WHERE C.customer_id = ?
     ORDER BY F.title
     '''
-    cursor = conn.cursor
+    cursor = conn.cursor()
     cursor.execute(query, (customer_id,))
-    
+
     return cursor.fetchall()
 
 
