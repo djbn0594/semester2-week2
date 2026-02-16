@@ -20,7 +20,7 @@ def customer_tickets(conn, customer_id):
     """
 
     query = '''
-    SELECT F.title, S.screen, T.Price
+    SELECT F.title, S.screen, T.price
     FROM customers C JOIN tickets T ON C.customer_id = T.customer_id
     JOIN screenings S ON T.screening_id = S.screening_id
     JOIN films F ON S.film_id = F.film_id
